@@ -70,5 +70,6 @@ export default class CreateUserValidator {
     minLength: '{{ field }} doit avoir au minimum {{ options.maxLength }} caractères',
     unique: '{{ field }} est existe déjà',
     alpha: "{{ field }} ne doit pas contenir de caractères spéciaux ni d'espace",
+    confirmed: 'Les mots de passe ne correspondent pas',
   }
 }
