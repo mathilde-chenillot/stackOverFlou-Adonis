@@ -2,6 +2,7 @@ import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import User from 'App/Models/User'
 import LoginValidator from 'App/Validators/Auth/LoginValidator'
 import CreateUserValidator from 'App/Validators/Auth/CreateUserValidator'
+import UpdateUserValidator from 'App/Validators/Auth/UpdateUserValidator'
 
 export default class UsersController {
   // To register
@@ -57,5 +58,21 @@ export default class UsersController {
       revoke: true,
     })
     // return response.redirect('/')
+  }
+
+  // To update
+
+  public async update({ request, response, params, auth }: HttpContextContract) {
+    try {
+      // const user = await User.findOrFail(params.id)
+      const data = await request.validate(UpdateUserValidator)
+      // await user.merge(data).save()
+
+      const user = await auth.user!.merge(data).save()
+
+      return response.ok(user)
+    } catch (error) {
+      return response.badRequest("Impossible de trouver l'utilisateur")
+    }
   }
 }

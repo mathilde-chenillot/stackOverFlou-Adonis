@@ -32,4 +32,8 @@ Route.group(() => {
   Route.post('/logout', 'UsersController.logout')
 }).prefix('/api/user')
 
-// .middleware('auth')
+Route.group(() => {
+  Route.patch('/update', 'UsersController.update')
+})
+  .middleware('auth')
+  .prefix('/api/user')

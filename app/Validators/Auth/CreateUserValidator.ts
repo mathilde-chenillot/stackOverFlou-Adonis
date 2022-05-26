@@ -48,7 +48,7 @@ export default class CreateUserValidator {
       rules.maxLength(155),
     ]),
 
-    password: schema.string({}, [rules.confirmed(), rules.minLength(8), rules.maxLength(155)]), // rules.confirmed(),
+    password: schema.string({}, [rules.confirmed(), rules.minLength(8), rules.maxLength(155)]),
 
     thumbnail: schema.string.nullableAndOptional(),
   })
@@ -67,7 +67,7 @@ export default class CreateUserValidator {
   public messages = {
     maxLength: '{{ field }} ne doit pas dépasser {{ options.maxLength }} caractères',
     minLength: '{{ field }} doit avoir au minimum {{ options.maxLength }} caractères',
-    unique: '{{ field }} est existe déjà',
+    unique: '{{ field }} existe déjà',
     alpha: "{{ field }} ne doit pas contenir de caractères spéciaux ni d'espace",
     confirmed: 'Les mots de passe ne correspondent pas',
   }
