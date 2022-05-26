@@ -48,7 +48,7 @@ export default class CreateUserValidator {
       rules.maxLength(155),
     ]),
 
-    password: schema.string({}, [rules.minLength(8), rules.maxLength(155)]), // rules.confirmed(),
+    password: schema.string({}, [rules.confirmed(), rules.minLength(8), rules.maxLength(155)]), // rules.confirmed(),
 
     thumbnail: schema.string.nullableAndOptional(),
   })
