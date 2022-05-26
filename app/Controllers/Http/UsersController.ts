@@ -79,8 +79,12 @@ export default class UsersController {
   // To delete
 
   public async delete({ response, params }: HttpContextContract) {
-    const user = await User.findOrFail(params.id)
-    await user.delete()
-    return response.ok(user)
+    try {
+      const user = await User.findOrFail(params.id)
+      await user.delete()
+      return response.ok(user)
+    } catch (error) {
+      return response.badRequest("Impossible de trouver l'utilisateur pour le supprimer")
+    }
   }
 }
