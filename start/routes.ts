@@ -38,3 +38,7 @@ Route.group(() => {
 })
   .middleware('auth')
   .prefix('/api/user')
+
+// Topic
+
+Route.resource('/api/topic', 'TopicsController').apiOnly().middleware('auth') // resource = raccourci pour enregistrer toutes les routes ensemble, apiOnly() supprime les routes servant à afficher les formulaires
