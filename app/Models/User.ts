@@ -1,6 +1,8 @@
 import { DateTime } from 'luxon'
-import { BaseModel, beforeSave, column } from '@ioc:Adonis/Lucid/Orm'
+import { BaseModel, beforeSave, column, hasMany, HasMany } from '@ioc:Adonis/Lucid/Orm'
 import Hash from '@ioc:Adonis/Core/Hash'
+import Topic from 'App/Models/Topic'
+import Message from 'App/Models/Message'
 
 export default class User extends BaseModel {
   @column({ isPrimary: true })
@@ -36,4 +38,10 @@ export default class User extends BaseModel {
       user.password = await Hash.make(user.password)
     }
   }
+
+  @hasMany(() => Topic)
+  public topics: HasMany<typeof Topic>
+
+  @hasMany(() => Message)
+  public messages: HasMany<typeof Message>
 }
