@@ -34,6 +34,7 @@ Route.group(() => {
 
 Route.group(() => {
   Route.patch('/update', 'UsersController.update')
+  Route.delete('/delete/:id', 'UsersController.delete')
 })
   .middleware('auth')
   .prefix('/api/user')

@@ -62,7 +62,7 @@ export default class UsersController {
 
   // To update
 
-  public async update({ request, response, params, auth }: HttpContextContract) {
+  public async update({ request, response, auth }: HttpContextContract) {
     try {
       // const user = await User.findOrFail(params.id)
       const data = await request.validate(UpdateUserValidator)
@@ -74,5 +74,13 @@ export default class UsersController {
     } catch (error) {
       return response.badRequest("Impossible de trouver l'utilisateur")
     }
+  }
+
+  // To delete
+
+  public async delete({ response, params }: HttpContextContract) {
+    const user = await User.findOrFail(params.id)
+    await user.delete()
+    return response.ok(user)
   }
 }
