@@ -1,6 +1,7 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import Topic from 'App/Models/Topic'
 import CreatePostValidator from 'App/Validators/Post/CreatePostValidator'
+import UpdateTopicValidator from 'App/Validators/Post/UpdateTopicValidator'
 
 export default class TopicsController {
   // To read all
@@ -17,11 +18,20 @@ export default class TopicsController {
     return response.ok(topics)
   }
 
-  // to create
+  // To create
 
   public async store({ request, response }: HttpContextContract) {
     const data = await request.validate(CreatePostValidator)
     const topic = await Topic.create(data)
     return response.created(topic)
+  }
+
+  // To update
+
+  public async update({ request, response, params }: HttpContextContract) {
+    const topic = await Topic.findOrFail(params.id)
+    const data = await request.validate(UpdateTopicValidator)
+    await topic.merge(data).save()
+    return response.ok(topic)
   }
 }
