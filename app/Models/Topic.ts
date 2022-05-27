@@ -13,6 +13,9 @@ export default class Topic extends BaseModel {
   @column()
   public description: string
 
+  @column()
+  public userId: number
+
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
 

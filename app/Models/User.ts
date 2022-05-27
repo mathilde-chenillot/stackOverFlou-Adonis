@@ -32,16 +32,16 @@ export default class User extends BaseModel {
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   public updatedAt: DateTime
 
+  @hasMany(() => Topic)
+  public topics: HasMany<typeof Topic>
+
+  @hasMany(() => Message)
+  public messages: HasMany<typeof Message>
+
   @beforeSave()
   public static async hashPassword(user: User) {
     if (user.$dirty.password) {
       user.password = await Hash.make(user.password)
     }
   }
-
-  @hasMany(() => Topic)
-  public topics: HasMany<typeof Topic>
-
-  @hasMany(() => Message)
-  public messages: HasMany<typeof Message>
 }
