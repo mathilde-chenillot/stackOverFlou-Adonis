@@ -31,16 +31,15 @@ Route.group(() => {
   Route.post('/login', 'UsersController.login')
   Route.post('/logout', 'UsersController.logout')
   Route.group(() => {
-    Route.group(() => {
-      Route.patch('/update', 'UsersController.update')
-      Route.delete('/delete/:id', 'UsersController.delete')
-    })
+    Route.patch('/update', 'UsersController.update')
+    Route.delete('/delete/:id', 'UsersController.delete')
   }).middleware('auth')
 }).prefix('/api/user')
 
-// Topic
+// Topic & Message
 Route.group(() => {
   Route.resource('/topic', 'TopicsController').apiOnly() // resource = raccourci pour enregistrer toutes les routes ensemble, apiOnly() supprime les routes servant à afficher les formulaires
+  Route.resource('/message', 'MessagesController').apiOnly()
 })
   .middleware('auth')
   .prefix('/api')
