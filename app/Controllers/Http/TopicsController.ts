@@ -34,4 +34,12 @@ export default class TopicsController {
     await topic.merge(data).save()
     return response.ok(topic)
   }
+
+  // To delete
+
+  public async destroy({ request, response, params }: HttpContextContract) {
+    const topic = await Topic.findOrFail(params.id)
+    await topic.delete()
+    response.ok(topic)
+  }
 }
