@@ -40,6 +40,7 @@ Route.group(() => {
 Route.group(() => {
   Route.resource('/topic', 'TopicsController').apiOnly() // resource = raccourci pour enregistrer toutes les routes ensemble, apiOnly() supprime les routes servant à afficher les formulaires
   Route.resource('/message', 'MessagesController').apiOnly()
+  Route.get('/message/byTopic/:topicId', 'MessagesController.getAllMessagesByTopic')
 })
   .middleware('auth')
   .prefix('/api')

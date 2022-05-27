@@ -8,8 +8,14 @@ export default class Topics extends BaseSchema {
       table.increments('id').primary()
       table.string('title', 25).notNullable()
       table.string('description', 255).notNullable()
-      // table.integer('user_id').unsigned().references('users.id').onDelete('CASCADE')
-      table.integer('user_id').notNullable()
+      table
+        .integer('user_id')
+        .unsigned()
+        .notNullable()
+        .references('id')
+        .inTable('users')
+        .onDelete('CASCADE')
+      // table.integer('user_id').notNullable()
       table.timestamps(true)
     })
   }
